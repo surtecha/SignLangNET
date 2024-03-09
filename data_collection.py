@@ -56,7 +56,7 @@ def extract_keypoints(results):
 DATA_PATH = os.path.join('MP_Data')
 actions = np.array(['hello', 'thanks', 'iloveyou'])
 
-num_sequences = 30
+num_sequences = 40
 sequence_length = 30
 
 for action in actions:
@@ -68,7 +68,7 @@ for action in actions:
 
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
 
@@ -92,15 +92,17 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
 
                 # Collecting frames by having delay between each sequence
                 if frame_num == 0:
-                    cv2.putText(image, 'Staring collection...', (120, 120),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 4, cv2.LINE_AA)
-                    cv2.putText(image, 'Collecting frames for {}. Video number {}'.format(action, sequence), (15, 12),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
+                    cv2.rectangle(image, (0, 0), (image.shape[1], 80), (255, 255, 255), -1)  # Draw white rectangle
+                    cv2.putText(image, 'Starting collection...', (120, 150),
+                                cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 0), 3, cv2.LINE_AA)
+                    cv2.putText(image, 'Collecting frames for "{}". Video number: {}'.format(action, sequence), (15, 60),
+                                cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 3, cv2.LINE_AA)
                     cv2.imshow('OpenCV Feed', image)
                     cv2.waitKey(2000)
                 else:
-                    cv2.putText(image, 'Collecting frames for {}. Video number {}'.format(action, sequence), (15, 12),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
+                    cv2.rectangle(image, (0, 0), (image.shape[1], 80), (255, 255, 255), -1)  # Draw white rectangle
+                    cv2.putText(image, 'Collecting frames for "{}". Video number: {}'.format(action, sequence), (15, 60),
+                                cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 3, cv2.LINE_AA)
                     cv2.imshow('OpenCV Feed', image)
 
 

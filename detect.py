@@ -65,9 +65,9 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
 
-model.load_weights('action.h5')
+model.load_weights('action_interrupted.h5')
 
-
+from scipy import stats
 colors = [(245,117,16), (117,245,16), (16,117,245)]
 def prob_viz(res, actions, input_frame, colors):
     output_frame = input_frame.copy()
@@ -87,7 +87,7 @@ cap = cv2.VideoCapture(0)
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     while cap.isOpened():
 
-
+        # Read feed
         ret, frame = cap.read()
 
         # Make detections
@@ -97,7 +97,7 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
         # Draw landmarks
         draw_styled_landmarks(image, results)
 
-        # Prediction logic
+        # 2. Prediction logic
         keypoints = extract_keypoints(results)
         sequence.append(keypoints)
         sequence = sequence[-30:]
@@ -108,7 +108,7 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
             predictions.append(np.argmax(res))
 
 
-            # Vizualization logic
+        #3. Viz logic
             if np.unique(predictions[-10:])[0]==np.argmax(res):
                 if res[np.argmax(res)] > threshold:
 
@@ -121,7 +121,7 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
             if len(sentence) > 5:
                 sentence = sentence[-5:]
 
-            # Visualization probabilities
+            # Viz probabilities
             image = prob_viz(res, actions, image, colors)
 
         cv2.rectangle(image, (0,0), (640, 40), (245, 117, 16), -1)

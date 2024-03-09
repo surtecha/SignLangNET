@@ -8,7 +8,7 @@ import mediapipe as mp
 DATA_PATH = os.path.join('MP_Data')
 actions = np.array(['hello', 'thanks', 'iloveyou'])
 
-num_sequences = 30
+num_sequences = 40
 sequence_length = 30
 
 # Preprocessing the data
@@ -31,7 +31,7 @@ for action in actions:
 X = np.array(sequences)
 y = to_categorical(labels).astype(int)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.05)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1)
 
 # Model
 from tensorflow.keras.models import Sequential
@@ -51,6 +51,9 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
 
-model.fit(X_train, y_train, epochs=2000, callbacks=[tb_callback])
-
-model.save('action.h5')
+try:
+    model.fit(X_train, y_train, epochs=500, callbacks=[tb_callback])
+except KeyboardInterrupt:
+    print("Training interrupted. Saving model...")
+    model.save('action_interrupted.h5')
+    print("Model saved as 'action_interrupted.h5'")
