@@ -53,7 +53,7 @@ def extract_keypoints(results):
     return np.concatenate([pose, face, left_hand, right_hand])
 
 
-DATA_PATH = os.path.join('MP_Data')
+DATA_PATH = os.path.join('dataset')
 actions = np.array(['hello', 'thanks', 'iloveyou'])
 
 num_sequences = 40

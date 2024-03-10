@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 import time
 import mediapipe as mp
 
-DATA_PATH = os.path.join('MP_Data')
+DATA_PATH = os.path.join('dataset')
 actions = np.array(['hello', 'thanks', 'iloveyou'])
 
 num_sequences = 40
@@ -55,5 +55,5 @@ try:
     model.fit(X_train, y_train, epochs=500, callbacks=[tb_callback])
 except KeyboardInterrupt:
     print("Training interrupted. Saving model...")
-    model.save('action_interrupted.h5')
-    print("Model saved as 'action_interrupted.h5'")
+    model.save('saved_model.h5')
+    print("Model saved as 'saved_model.h5'")

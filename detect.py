@@ -65,7 +65,7 @@ model.add(Dense(actions.shape[0], activation='softmax'))
 
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
 
-model.load_weights('action_interrupted.h5')
+model.load_weights('saved_model.h5')
 
 from scipy import stats
 colors = [(245,117,16), (117,245,16), (16,117,245)]
