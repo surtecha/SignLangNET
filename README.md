@@ -61,6 +61,8 @@ For more information on LSTMs, refer to the [LSTM Wikipedia page](https://en.wik
     pip install -r requirements.txt
     ```
 
+**Note for Windows Users:** If you are using a Windows machine, please modify the `requirements.txt` file by replacing the TensorFlow packages with Windows-specific versions.
+
 ## Usage
 
 ### Data Collection
