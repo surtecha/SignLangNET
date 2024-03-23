@@ -52,7 +52,7 @@ For more information on LSTMs, refer to the [LSTM Wikipedia page](https://en.wik
 1. Clone this repository:
 
     ```bash
-    git clone https://github.com/yourusername/SignLangNET.git
+    git clone https://github.com/surtecha/SignLangNET.git
     ```
 
 2. Install dependencies:
