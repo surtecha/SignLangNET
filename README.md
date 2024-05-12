@@ -67,7 +67,7 @@ For more information on LSTMs, refer to the [LSTM Wikipedia page](https://en.wik
 
 ### Data Collection
 
-1. Run `utils.py` to collect training data. Follow on-screen instructions to perform gestures in front of the webcam. Press 'q' to stop recording and move to the next gesture.
+1. Run `utils.py` to collect training data. Follow on-screen instructions to perform gestures in front of the webcam. The program will exit automatically after recording all the gestures.
 
 ### Model Training
 
